@@ -34,13 +34,13 @@ Reveal.initialize({
 
 ## Usage
 
-With no further configuration after installation, the plugin will configure one alternative preset for distration free presentation mode.
+With no further configuration, the plugin will configure one alternative preset for distration free presentation mode.
 
-To switch between alternative presets you can either:
+To use an alternative presets you can either:
 
-- toggle thru the alternative presets by pressing the ```A``` shortcut on the keyboard
-- set the ```altMode``` parameter as a URI parameter
-- set the ```altMode``` parameter in your configuration
+- toggle thru the alternative presets by pressing the ```A``` shortcut on the keyboard. This is only available if you are not in PDF export mode.
+- set the ```altMode``` parameter as a URI parameter.
+- set the ```altMode``` parameter in your configuration.
 
 The URI parameter will override the value of your configuration. By default the default configuration is shown which is equivalent to ```altMode=0```.
 
