@@ -131,6 +131,7 @@ AltMode.getPresenterConfig();
 
 ## License
 
-[WTFPL licensed](http://www.wtfpl.net/).
 
-Copyright (C) 2018 [Sören Weber](https://github.com/McShelby)
+[MIT licensed](https://en.wikipedia.org/wiki/MIT_License).
+
+Copyright (C) 2018 [Sören Weber](https://soeren-weber.de)
