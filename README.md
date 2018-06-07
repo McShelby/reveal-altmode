@@ -1,6 +1,6 @@
 # AltMode
 
-A plugin to switch between multiple alternative configuartion presets eg. screen and presentation mode, day and night mode, etc. buy pressing a shortcut.
+A [reveal.js](https://github.com/hakimel/reveal.js/) plugin to switch between multiple alternative configuartion presets eg. screen and presentation mode, day and night mode, etc. buy pressing a shortcut.
 
 <img style="border: 1px solid gray" src="screenshot-night.png" width="55%">
 
@@ -13,6 +13,8 @@ If you are presenting your slide deck you are usually used to handling reveal.js
 On the other hand you may want to upload your slides later. Other viewers in front of their computers will then operate your presentation and may not be used to handling reveal.js presentations. In this case you want to give them every available help to navigate thru your slide deck.
 
 Instead of adjusting the configuration for every use case, you can store alternative configurations as ready to use presets and switch between them by pressing a button.
+
+To change themes in alternative presets the [ThemeOverride](https://github.com/McShelby/reveal-themeoverride) plugin or similar is necessary.
 
 ## Installation
 
