@@ -1,6 +1,6 @@
-# reveal.js-altmode
+# AltMode
 
-A plugin to switch between multiple alternative configuartion presets eg. screen and presentation mode, day and night mode, etc. buy pressing a button.
+A plugin to switch between multiple alternative configuartion presets eg. screen and presentation mode, day and night mode, etc. buy pressing a shortcut.
 
 <img style="border: 1px solid gray" src="screenshot-night.png" width="55%">
 
