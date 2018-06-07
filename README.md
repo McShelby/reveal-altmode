@@ -1,6 +1,6 @@
 # AltMode
 
-A [reveal.js](https://github.com/hakimel/reveal.js/) plugin to switch between multiple alternative configuartion presets eg. screen and presentation mode, day and night mode, etc. buy pressing a shortcut.
+A [reveal.js](https://github.com/hakimel/reveal.js/) plugin to switch between multiple alternative configuartion presets eg. screen and presentation mode, day and night mode, etc. by pressing a shortcut key.
 
 <img style="border: 1px solid gray" src="screenshot-night.png" width="55%">
 
