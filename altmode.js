@@ -126,6 +126,30 @@ var AltMode = ( function( Reveal, global ){
 		altMode = +altMode;
 		altMode = altMode % config.altModeConfig.length;
 
+		// set altMode parameter into browser URL without reload;
+		// by that we can toggle to PDF export mode with an alternate
+		// preset active
+		var url_doc = new URL( document.URL );
+		var query_doc = new URLSearchParams( url_doc.searchParams );
+		// reapply the search params to normalize old and new url
+		// in case a query parameter without a following equal
+		// sign was given
+		url_doc.search = ( query_doc.toString() ? '?' + query_doc.toString() : '' );
+		var old_url = url_doc.toString();
+		if( !altMode ){
+			query_doc.delete( 'altMode' );
+		}else{
+			query_doc.set( 'altMode', altMode );
+		}
+		url_doc.search = ( query_doc.toString() ? '?' + query_doc.toString() : '' );
+		var new_url = url_doc.toString();
+
+		// only change URL if it really changed to not mess
+		// up browser history
+		if( old_url != new_url ){
+			window.history.pushState( {}, '', new_url );
+		}
+
 		var saved_config = clone( config.altModeConfig[ altMode ] );
 		delete saved_config.altModeDefault;
 		saved_config.altMode = altMode;
@@ -138,9 +162,20 @@ var AltMode = ( function( Reveal, global ){
 		}
 	}
 
+	function isPrintingPDF(){
+		return ( /print-pdf/gi ).test( window.location.search );
+	}
+
 	function toggleAltMode(){
 		var config = Reveal.getConfig();
-		setAltMode( ++config.altMode );
+		if( !isPrintingPDF() ){
+			// switch the configuration presets is
+			// not allowed in PDF export mode because
+			// this will mess up the presentation;
+			// toggle configuration presets first before
+			// switching to PDF export mode
+			setAltMode( ++config.altMode );
+		}
 	}
 
 	function applyAltModeParameter(){
@@ -152,13 +187,34 @@ var AltMode = ( function( Reveal, global ){
 	function installKeyBindings(){
 		var config = Reveal.getConfig();
 		var shortcut = config.altModeShortcut || 'A';
-		var keyboard = {};
+		if( !config.keyboard ){
+			return;
+		}
+		var keyboard = config.keyboard === true ? {} : config.keyboard;
 		keyboard[ shortcut.toUpperCase().charCodeAt( 0 ) ] = toggleAltMode;
 
 		Reveal.registerKeyboardShortcut( shortcut, 'Alternative modes' );
 		Reveal.configure({
 			keyboard: keyboard
 		});
+	}
+
+	function installDependencyCallback( c ){
+		var config = Reveal.getConfig();
+		if( !config.dependencies.length ){
+			// user configured no scripts so we can
+			// run our callback immediately
+			c();
+		}else{
+			var dep = config.dependencies[ config.dependencies.length - 1 ];
+			var old_c = dep.callback;
+			dep.callback = function(){
+				if( old_c ){
+					old_c();
+				}
+				c();
+			}
+		}
 	}
 
 	function configure( o ){
@@ -172,8 +228,14 @@ var AltMode = ( function( Reveal, global ){
 
 	function install(){
 		installKeyBindings();
-		setAltModeConfig();
-		applyAltModeParameter();
+		installDependencyCallback( function(){
+			// we are only allowed to run, once every other dependency
+			// has been loaded; otherwise we would safe the default
+			// configuration with incomplete settings and restore it
+			// once we toggled back to altMode=0
+			setAltModeConfig();
+			applyAltModeParameter();
+		});
 	}
 
 	install();
