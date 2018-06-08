@@ -65,7 +65,6 @@ var AltMode = ( function( Reveal, global ){
 			controlsTutorial: false,
 			helpButtonDisplay: 'none', // HelpButton plugin
 			hideAddressBar: true,
-			history: false,
 			mouseWheel: false,
 			previewLinks: false,
 			progress: false,
