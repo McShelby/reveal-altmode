@@ -189,16 +189,11 @@ var AltMode = ( function( Reveal, global ){
 	function installKeyBindings(){
 		var config = Reveal.getConfig();
 		var shortcut = config.altModeShortcut || 'A';
-		if( !config.keyboard ){
-			return;
-		}
-		var keyboard = config.keyboard === true ? {} : config.keyboard;
-		keyboard[ shortcut.toUpperCase().charCodeAt( 0 ) ] = toggleAltMode;
-
-		Reveal.registerKeyboardShortcut( shortcut, 'Alternative modes' );
-		Reveal.configure({
-			keyboard: keyboard
-		});
+		Reveal.addKeyBinding({
+			keyCode: shortcut.toUpperCase().charCodeAt( 0 ),
+			key: shortcut,
+			description: 'Toggle alternative modes'
+		}, toggleAltMode );
 	}
 
 	function installAltMode(){
