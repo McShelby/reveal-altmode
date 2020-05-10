@@ -8,7 +8,7 @@ A [reveal.js](https://github.com/hakimel/reveal.js/) plugin to switch between mu
 
 <img style="border: 1px solid gray" src="screenshot-day.png" width="55%">
 
-If you are presenting your slide deck you are usually used to handling reveal.js. You want to keep your audience free of all unnecessary visual distration to stay concentrated on what you are presenting.
+If you are presenting your slide deck you are usually used to handling reveal.js. You want to keep your audience free of all unnecessary visual distraction to stay concentrated on what you are presenting.
 
 On the other hand you may want to upload your slides later. Other viewers in front of their computers will then operate your presentation and may not be used to handling reveal.js. In this case you want to give them every available help to navigate thru your slide deck.
 
@@ -34,7 +34,7 @@ Reveal.initialize({
 
 ## Usage
 
-With no further configuration, the plugin will configure one alternative preset for distration free presentation mode.
+With no further configuration, the plugin will configure one alternative preset for distraction free presentation mode.
 
 To use an alternative preset you can either:
 
