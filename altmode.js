@@ -74,7 +74,8 @@ var AltMode = ( function( Reveal, global ){
 
 	function setAltModeConfig( altModeConfig ){
 		var config = Reveal.getConfig();
-		altModeConfig = altModeConfig !== undefined ? altModeConfig : config.altModeConfig;
+		altModeConfig = altModeConfig !== undefined ? altModeConfig
+			: config.altModeConfig;
 
 		// we check if the active config should have distraction
 		// free presenter mode defaults been applied to
@@ -121,7 +122,9 @@ var AltMode = ( function( Reveal, global ){
 
 	function setAltMode( altMode ){
 		var config = Reveal.getConfig();
-		altMode = altMode !== null ? altMode : config.altMode !== undefined ? config.altMode : defMode;
+		altMode = altMode !== null ? altMode
+			: config.altMode !== undefined ? config.altMode
+			: defMode;
 		altMode = +altMode;
 		altMode = altMode % config.altModeConfig.length;
 
@@ -217,12 +220,11 @@ var AltMode = ( function( Reveal, global ){
 	}
 
 	function configure( o ){
-		if( o && o.altConfig !== undefined ){
-			setAltModeConfig( o.altConfig );
+		if( !o || o !== Object(o) ){
+			return;
 		}
-		if( o && o.altMode !== undefined ){
-			setAltMode( o && o.altMode );
-		}
+		setAltModeConfig( o.altConfig );
+		setAltMode( o.altMode );
 	}
 
 	function install(){
