@@ -62,7 +62,7 @@ Reveal.initialize({
 	altModeConfig: [
 		{
 			// distraction free presentation mode
-			altModePresenter=true
+			altModePresenter: true
 		},{
 			// change transitions in this preset
 			backgroundTransition: 'zoom',

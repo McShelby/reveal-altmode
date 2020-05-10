@@ -122,8 +122,8 @@ var AltMode = ( function( Reveal, global ){
 
 	function setAltMode( altMode ){
 		var config = Reveal.getConfig();
-		altMode = altMode !== null ? altMode
-			: config.altMode !== undefined ? config.altMode
+		altMode = altMode !== null && !isNaN( altMode ) ? altMode
+			: config.altMode !== undefined && !isNaN( config.altMode ) ? config.altMode
 			: defMode;
 		altMode = +altMode;
 		altMode = altMode % config.altModeConfig.length;
@@ -201,22 +201,9 @@ var AltMode = ( function( Reveal, global ){
 		});
 	}
 
-	function installDependencyCallback( c ){
-		var config = Reveal.getConfig();
-		if( !config.dependencies.length ){
-			// user configured no scripts so we can
-			// run our callback immediately
-			c();
-		}else{
-			var dep = config.dependencies[ config.dependencies.length - 1 ];
-			var old_c = dep.callback;
-			dep.callback = function(){
-				if( old_c ){
-					old_c();
-				}
-				c();
-			}
-		}
+	function installAltMode(){
+		setAltModeConfig();
+		applyAltModeParameter();
 	}
 
 	function configure( o ){
@@ -229,14 +216,17 @@ var AltMode = ( function( Reveal, global ){
 
 	function install(){
 		installKeyBindings();
-		installDependencyCallback( function(){
-			// we are only allowed to run, once every other dependency
-			// has been loaded; otherwise we would safe the default
-			// configuration with incomplete settings and restore it
-			// once we toggled back to altMode=0
-			setAltModeConfig();
-			applyAltModeParameter();
-		});
+		// we are only allowed to run, once every other dependency
+		// has been loaded; otherwise we would safe the default
+		// configuration with incomplete settings and restore it
+		// once we toggled back to altMode=0
+		if( Reveal.isReady() ){
+			installAltMode();
+		}else{
+			Reveal.addEventListener( 'ready', function(){
+				installAltMode();
+			});
+		}
 	}
 
 	install();
