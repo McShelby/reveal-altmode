@@ -1,6 +1,6 @@
 # AltMode
 
-A [reveal.js](https://github.com/hakimel/reveal.js/) plugin to switch between multiple alternative configuartion presets eg. screen and presentation mode, day and night mode, etc. by pressing a shortcut key.
+A [reveal.js](https://github.com/hakimel/reveal.js/) plugin to switch between multiple alternative configuartion presets by pressing a shortcut key.
 
 <img style="border: 1px solid gray" src="screenshot-night.png" width="55%">
 
@@ -10,11 +10,11 @@ A [reveal.js](https://github.com/hakimel/reveal.js/) plugin to switch between mu
 
 If you are presenting your slide deck you are usually used to handling reveal.js. You want to keep your audience free of all unnecessary visual distration to stay concentrated on what you are presenting.
 
-On the other hand you may want to upload your slides later. Other viewers in front of their computers will then operate your presentation and may not be used to handling reveal.js presentations. In this case you want to give them every available help to navigate thru your slide deck.
+On the other hand you may want to upload your slides later. Other viewers in front of their computers will then operate your presentation and may not be used to handling reveal.js. In this case you want to give them every available help to navigate thru your slide deck.
 
-Instead of adjusting the configuration for every use case, you can store alternative configurations as ready to use presets and switch between them by pressing a button.
+Instead of adjusting the configuration for every use case, you can store alternative configurations as ready to use presets and switch between them by pressing a shortcut key.
 
-To change themes in alternative presets the [ThemeOverride](https://github.com/McShelby/reveal-themeoverride) plugin or similar is necessary.
+To change themes in presets the [ThemeOverride](https://github.com/McShelby/reveal-themeoverride) plugin or similar may come in handy.
 
 ## Installation
 
@@ -36,35 +36,17 @@ Reveal.initialize({
 
 With no further configuration, the plugin will configure one alternative preset for distration free presentation mode.
 
-To use an alternative presets you can either:
+To use an alternative preset you can either:
 
-- toggle thru the alternative presets by pressing the ```A``` shortcut on the keyboard. This is only available if you are not in PDF export mode.
-- set the ```altMode``` parameter as a URI parameter.
-- set the ```altMode``` parameter in your configuration.
+- toggle thru the presets by pressing the ```A``` shortcut on the keyboard. This is only available if you are not in PDF export mode.
+- set the ```altMode``` parameter as an URI parameter.
+- set the ```altMode``` parameter in the configuration options.
 
-The URI parameter will override the value of your configuration. By default the default configuration is shown which is equivalent to ```altMode=0```.
+The URI parameter will have precedence over the configuration option. By default the default configuration is shown which is equivalent to ```altMode=0```.
 
-### Distraction free presentation mode
+### Configuration
 
-This alternative preset removes all unnecessary UI elements from your slide. It is installed if you are not giving any own configuration of alternative presets. It corresponds to the following reveal.js configuration parameters:
-
-```javascript
-Reveal.initialize({
-	controls: false,
-	controlsTutorial: false,
-	helpButtonDisplay: 'none', // HelpButton plugin
-	hideAddressBar: true,
-	history: false,
-	mouseWheel: false,
-	previewLinks: false,
-	progress: false,
-	slideNumber: false,
-});
-```
-
-### Parameter
-
-You can define an unlimited amount of alternative presets in the ```altModeConfig``` parameter of your configuration. You access them with the nummerical ```altMode``` parameter. ```0``` is the default configuration, all other numbers -1 refer to alternative configurations defined in the ```altModeConfig``` parameter.
+You can define an unlimited amount of alternative presets in the ```altModeConfig``` array parameter of your configuration. You access them with the nummerical ```altMode``` parameter. ```0``` is the default configuration, all other numbers -1 refer to alternative configuration items defined in the ```altModeConfig``` array parameter.
 
 ```javascript
 Reveal.initialize({
@@ -74,7 +56,7 @@ Reveal.initialize({
 	// set, the plugin will install distraction free presentation mode
 	// as your only alternative preset.
 	// Once the array is defined (even if it is empty), distraction free
-	// presentation mode needs to be set manullay. You can add distraction
+	// presentation mode needs to be set manually. You can add distraction
 	// free presentation mode to any configuration preset by setting
 	// altModePresenter=true - see below.
 	altModeConfig: [
@@ -105,11 +87,28 @@ Reveal.initialize({
 });
 ```
 
-
-### URI Parameter example
+### URI Parameter
 
 ```
 http://example.com/demo.html?altMode=1
+```
+
+### Distraction free presentation mode
+
+This alternative preset removes all unnecessary UI elements from your slide. It is installed if you are not giving any own configuration of alternative presets. It corresponds to the following reveal.js configuration parameters:
+
+```javascript
+Reveal.initialize({
+	controls: false,
+	controlsTutorial: false,
+	helpButtonDisplay: 'none', // HelpButton plugin
+	hideAddressBar: true,
+	history: false,
+	mouseWheel: false,
+	previewLinks: false,
+	progress: false,
+	slideNumber: false,
+});
 ```
 
 ## API
@@ -121,6 +120,7 @@ The plugin API is accessible from the global ```AltMode``` object.
 ```javascript
 // Change a config value at runtime
 AltMode.configure({
+	// Takes the same options as for configuration
 	altMode: 1,
 });
 
@@ -133,4 +133,4 @@ AltMode.getPresenterConfig();
 
 [MIT licensed](https://en.wikipedia.org/wiki/MIT_License).
 
-Copyright (C) 2018 [Sören Weber](https://soeren-weber.de)
+Copyright (C) 2020 [Sören Weber](https://soeren-weber.de)
