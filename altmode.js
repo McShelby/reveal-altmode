@@ -192,7 +192,7 @@ var AltMode = ( function( _Reveal, global ){
 		var shortcut = config.altModeShortcut || 'A';
 		Reveal.addKeyBinding({
 			keyCode: shortcut.toUpperCase().charCodeAt( 0 ),
-			key: shortcut,
+			key: shortcut.toUpperCase(),
 			description: 'Toggle alternative modes'
 		}, toggleAltMode );
 	}
