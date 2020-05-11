@@ -1,5 +1,6 @@
-var AltMode = ( function( Reveal, global ){
+var AltMode = ( function( _Reveal, global ){
 
+	var Reveal = _Reveal;
 	var defMode = 0;
 
 	// Cloning by using a JSON isn't working here because
@@ -224,11 +225,23 @@ var AltMode = ( function( Reveal, global ){
 		}
 	}
 
-	install();
-
-	return {
+	var Plugin = {
 		configure: configure,
 		getPresenterConfig: getPresenterConfig
-	};
+	}
+
+	if( Reveal && Reveal.VERSION && Reveal.VERSION.length && Reveal.VERSION[ 0 ] == '3' ){
+		// reveal 3.x
+		install();
+	}else{
+		// must be reveal 4.x
+		Plugin.id = 'alt-mode';
+		Plugin.init = function( _Reveal ){
+			Reveal = _Reveal;
+			install();
+		};
+	}
+
+	return Plugin;
 
 })( Reveal, window );
