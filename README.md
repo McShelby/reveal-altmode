@@ -1,6 +1,6 @@
 # AltMode
 
-A [reveal.js](https://github.com/hakimel/reveal.js/) plugin to switch between multiple alternative configuartion presets by pressing a shortcut key.
+A [reveal.js](https://github.com/hakimel/reveal.js/)  3.x / 4.x plugin to switch between multiple alternative configuartion presets by pressing a shortcut key.
 
 <img style="border: 1px solid gray" src="screenshot-night.png" width="55%">
 
@@ -18,9 +18,25 @@ To change themes in presets the [ThemeOverride](https://github.com/McShelby/reve
 
 ## Installation
 
-Copy this repository into the plugins folder of your reveal.js presentation, ie ```plugin/altmode```.
+Copy this repository into the plugin folder of your reveal.js presentation, ie ```plugin/altmode```.
 
-Add the plugin to the dependencies in your presentation, as below.
+Add the plugin to the initialization of your presentation, as below.
+
+### reveal 4.x
+
+```javascript
+<script src="plugin/altmode/altmode.js"></script>
+// .. 
+Reveal.initialize({
+	// ...
+	plugins: [
+		// ..
+		AltMode,
+	]
+});
+```
+
+### reveal 3.x
 
 ```javascript
 Reveal.initialize({
